@@ -2,18 +2,18 @@
  Gestionar agencias de taxis desde whatsapp
 
 # Install
- composer require raydelpq/whatsapp-api
+ ``composer require raydelpq/whatsapp-api``
 
 # Public Vendor
- php artisan vendor:publish --tag=whatsappapi
+ ``php artisan vendor:publish --tag=whatsappapi``
 
 # Provider
- Raydelpq\WhatsappApi\WhatsappApiServiceProvider::class
+ ``Raydelpq\WhatsappApi\WhatsappApiServiceProvider::class``
 
 # Jobs
- Raydelpq\WhatsappApi\Jobs\ApiWhastappAdd
- Raydelpq\WhatsappApi\Jobs\ApiWhastappDel
- Raydelpq\WhatsappApi\Jobs\ApiWhastappFondo
+ -``Raydelpq\WhatsappApi\Jobs\ApiWhastappAdd``
+ -``Raydelpq\WhatsappApi\Jobs\ApiWhastappDel``
+ -``Raydelpq\WhatsappApi\Jobs\ApiWhastappFondo``
 
 # Componente de Livewire
  <livewire:taxista.whatsapp :taxista='$taxista'>
