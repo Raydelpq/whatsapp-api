@@ -5,7 +5,7 @@ use Exception;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
 use Raydelpq\WhatsappApi\Models\Whatsapp;
 
 class WhatsAppController extends Controller
