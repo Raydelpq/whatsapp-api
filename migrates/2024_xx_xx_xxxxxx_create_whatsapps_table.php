@@ -26,7 +26,9 @@ return new class extends Migration
         });
 
         Schema::table('taxistas', function (Blueprint $table) {
-            $table->boolean('permiso')->default(false)->after('descuento');
+            if (!Schema::hasColumn('taxistas', 'permiso')) {
+                $table->boolean('permiso')->default(false)->after('descuento');
+            }
         });
     }
 
