@@ -7,6 +7,9 @@
 # Public Vendor
  ``php artisan vendor:publish --tag=whatsappapi``
 
+# Ejecutar Migracion
+ ``php artisan migrate``
+
 # Provider
  ``Raydelpq\WhatsappApi\WhatsappApiServiceProvider::class``
 
