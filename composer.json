@@ -1,6 +1,7 @@
 {
     "name": "raydelpq/whatsapp-api",
     "description": "Gestionas grupos y usuarios de whatsapp conjunto con la libreria whatsapp-web.js",
+    "version" : "1.0.0",
     "license": "MIT",
     "autoload": {
         "psr-4": {
@@ -15,6 +16,8 @@
     ],
     "minimum-stability": "stable",
     "require": {
+        "php": "^8.0",
+        "laravel/framework": "^9.0",
         "illuminate/support": "^9"
     },
     "extra": {
