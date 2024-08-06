@@ -57,7 +57,8 @@ class ApiWhastappDel implements ShouldQueue
         $inGrupo = true;
         foreach ($this->taxista->whatsapps as $grupo) {
             $res = WhatsAppController::inGroup($grupo->group_id,$numero);
-            $inGrupo = $res->status;
+            $content = $res->getOriginalContent();
+            $inGrupo = $content['status'];
             WhatsAppController::delGroup($grupo->group_id,$numero);
         }
 

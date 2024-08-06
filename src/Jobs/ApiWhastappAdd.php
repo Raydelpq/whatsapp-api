@@ -58,7 +58,8 @@ class ApiWhastappAdd implements ShouldQueue
         foreach($this->taxista->whatsapps as $grupo){
 
             $res = WhatsAppController::inGroup($grupo->group_id,$numero);
-            $inGrupo = $res->status;
+            $content = $res->getOriginalContent();
+            $inGrupo = $content['status'];
 
             WhatsAppController::addGroup($grupo->group_id,$numero);
         }

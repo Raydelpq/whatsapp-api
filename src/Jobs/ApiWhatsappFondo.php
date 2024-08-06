@@ -48,7 +48,8 @@ class ApiWhatsappFondo implements ShouldQueue
 
                     if($inGrupo == null){
                         $res = WhatsAppController::inGroup($grupo->group_id,$numero);
-                        $inGrupo = $res->status;
+                        $content = $res->getOriginalContent();
+                        $inGrupo = $content['status'];
                     }
 
                     WhatsAppController::addGroup($grupo->group_id, $numero);
@@ -66,7 +67,8 @@ class ApiWhatsappFondo implements ShouldQueue
 
                         if($inGrupo == null){
                             $res = WhatsAppController::inGroup($grupo->group_id,$numero);
-                            $inGrupo = $res->status;
+                            $content = $res->getOriginalContent();
+                            $inGrupo = $content['status'];
                         }
 
                         WhatsAppController::delGroup($grupo->group_id, $numero);
