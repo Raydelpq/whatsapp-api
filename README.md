@@ -16,4 +16,8 @@
  -``Raydelpq\WhatsappApi\Jobs\ApiWhastappFondo``
 
 # Componente de Livewire
- <livewire:taxista.whatsapp :taxista='$taxista'>
+ ``<livewire:taxista.whatsapp :taxista='$taxista'>``
+
+# Mostrar QR
+ Limpiar cache de Rutas ``php artisan route:cache``
+ Ruta ``/getqr``
