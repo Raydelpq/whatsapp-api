@@ -49,3 +49,6 @@
 # Mostrar QR
  Limpiar cache de Rutas ``php artisan route:cache``
  Ruta ``/getqr``
+
+# Expulsar a todos los taxistas 
+   ``php artisan out:taxista``

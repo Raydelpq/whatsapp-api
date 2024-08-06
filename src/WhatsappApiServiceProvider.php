@@ -21,6 +21,12 @@ class WhatsappApiServiceProvider extends ServiceProvider
             __DIR__.'/../lang' => $this->app->langPath('./'),
         ],'whatsappapi');
 
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                Raydelpq\WhatsappApi\Console\Commands\OutTaxista::class,
+            ]);
+        }
+
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'whatsapp-api');
         Livewire::component('taxista.whatsapp', Whatsapp::class);
         Livewire::component('get-qr', GetQr::class);
