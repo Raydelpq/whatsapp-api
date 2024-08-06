@@ -93,5 +93,13 @@ class Whatsapp extends Component
 
         $this->emit('message','Cambio Realizado','success');
     }
+
+    // Cambiar pwewrmisos a taxistas de credito
+    public function changePermiso(){
+        $this->permiso = !$this->permiso;
+        $this->taxista->permiso = $this->permiso;
+        $this->taxista->update();
+        $this->emit('message','Cambio Realizado','success');
+    }
   
 }
