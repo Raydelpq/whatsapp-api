@@ -1,0 +1,27 @@
+{
+    "name": "raydelpq/whatsapp-api",
+    "description": "Gestionas grupos y usuarios de whatsapp conjunto con la libreria whatsapp-web.js",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Raydelpq\\WhatsappApi\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Raydel Piloto Quesada",
+            "email": "pilotoraydel@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "illuminate/support": "^10.48"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Raydelpq\\WhatsappApi\\WhatsappApiServiceProvider"
+            ]
+        }
+    }
+}
