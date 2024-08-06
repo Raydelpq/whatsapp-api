@@ -5,8 +5,8 @@ namespace Raydelpq\WhatsappApi\Http\Livewire\Taxista;
 use Livewire\Component;
 use Illuminate\Support\Facades\Http;
 use Raydelpq\WhatsappApi\Models\Whatsapp as ModelsWhatsapp;
-use App\Jobs\ApiWhastappAdd;
-use App\Jobs\ApiWhastappDel;
+use Raydelpq\WhatsappApi\Jobs\ApiWhastappAdd;
+use Raydelpq\WhatsappApi\Jobs\ApiWhastappDel; 
 
 class Whatsapp extends Component
 {
