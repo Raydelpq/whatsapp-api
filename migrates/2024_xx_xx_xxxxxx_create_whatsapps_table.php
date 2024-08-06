@@ -24,6 +24,10 @@ return new class extends Migration
             $table->foreignId('taxista_id')->references('id')->on('taxistas')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('whatsapp_id')->references('id')->on('whatsapps')->onUpdate('cascade')->onDelete('cascade');
         });
+
+        Schema::table('taxistas', function (Blueprint $table) {
+            $table->boolean('permiso')->default(false)->after('descuento');
+        });
     }
 
     /**
@@ -34,5 +38,9 @@ return new class extends Migration
     public function down()
     {
         Schema::dropIfExists('whatsapps');
+        Schema::dropIfExists('taxista_whatsapp');
+        Schema::table('taxistas', function (Blueprint $table) {
+            $table->dropColumn('permiso');
+        });
     }
 };
