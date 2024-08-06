@@ -15,6 +15,17 @@
     return $this->belongsToMany(\Raydelpq\WhatsappApi\Models\Whatsapp::class);
  }
 
+ ## Dentro del Modelo agregar los jobs en las funciones
+  ### addSaldo
+   ``\Raydelpq\WhatsappApi\Jobs\ApiWhastappAdd::dispatch($this);``
+
+   ### addSaldo
+   ``\Raydelpq\WhatsappApi\Jobs\ApiWhastappDel::dispatch($this);``
+
+# Dentro de App\Http\Livewire\Taxista\AgregarFonfo
+ ## El el metodo procesar antes de los eventos
+ ``\Raydelpq\WhatsappApi\Jobs\ApiWhatsappFondo::dispatch($this->taxista);``
+
 # Provider
  ``Raydelpq\WhatsappApi\WhatsappApiServiceProvider::class``
 
