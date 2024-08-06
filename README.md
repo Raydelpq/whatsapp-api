@@ -10,6 +10,11 @@
 # Ejecutar Migracion
  ``php artisan migrate``
 
+# Agragar al Model Taxista
+ public function whatsapps(){
+    return $this->belongsToMany(\Raydelpq\WhatsappApi\Models\Whatsapp::class);
+ }
+
 # Provider
  ``Raydelpq\WhatsappApi\WhatsappApiServiceProvider::class``
 
