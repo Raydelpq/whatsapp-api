@@ -44,7 +44,7 @@ class OutTaxista extends Command
                     foreach($taxista->whatsapps as $grupo){
                         WhatsAppController::delGroup($grupo->group_id,$numero);
                         
-                        $mensaje = Lang::get('whatsappapi.expulsar',['name' => $this->taxista->user->name,'fondo' => $this->taxista->fondo]);
+                        $mensaje = Lang::get('whatsappapi.expulsar',['name' => $taxista->user->name,'fondo' => $taxista->fondo]);
                         WhatsAppController::sendMessage($numero,$mensaje);
                         
                         $this->info("ID: {$taxista->id} - {$taxista->user->name} {$taxista->user->apellidos} - {$numero}");
