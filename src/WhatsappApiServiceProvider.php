@@ -23,7 +23,7 @@ class WhatsappApiServiceProvider extends ServiceProvider
 
         if ($this->app->runningInConsole()) {
             $this->commands([
-                Raydelpq\WhatsappApi\Console\Commands\OutTaxista::class,
+                \Raydelpq\WhatsappApi\Console\Commands\OutTaxista::class,
             ]);
         }
 
