@@ -42,7 +42,7 @@ class ApiWhatsappFondo implements ShouldQueue
         if (config('whatsappapi.API_WA')) {
             $min = config('whatsappapi.MIN_WA');
 
-            if ($this->taxista->fondo => $min) {
+            if ($this->taxista->fondo >= $min) {
                 $inGrupo = null;
                 foreach ($this->taxista->whatsapps as $grupo) {
 
