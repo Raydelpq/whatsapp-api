@@ -16,7 +16,7 @@ class WhatsappApiServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../config/whatsappapi.php' => config_path('whatsappapi.php'),
             __DIR__.'/../lang' => $this->app->langPath('./'),
-        ]);
+        ],'whatsappapi');
 
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'whatsapp-api');
         Livewire::component('taxista.whatsapp', Whatsapp::class);
