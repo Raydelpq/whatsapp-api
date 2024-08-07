@@ -42,12 +42,17 @@ class OutTaxista extends Command
                     $numero = WhatsAppController::getNumero($taxista->user->telefono);
 
                     foreach($taxista->whatsapps as $grupo){
-                        WhatsAppController::delGroup($grupo->group_id,$numero);
+                        $res = WhatsAppController::inGroup($grupo->group_id,$numero);
+                        $content = $res->getOriginalContent();
+                        $inGrupo = $content['status'];
+
+                        if($inGrupo){
+                            WhatsAppController::delGroup($grupo->group_id,$numero);
+                            $mensaje = Lang::get('whatsappapi.expulsar',['name' => $taxista->user->name,'fondo' => $taxista->fondo]);
+                            WhatsAppController::sendMessage($numero,$mensaje);
+                            $this->info("ID: {$taxista->id} - {$taxista->user->name} {$taxista->user->apellidos} - {$numero}");
+                        }
                         
-                        $mensaje = Lang::get('whatsappapi.expulsar',['name' => $taxista->user->name,'fondo' => $taxista->fondo]);
-                        WhatsAppController::sendMessage($numero,$mensaje);
-                        
-                        $this->info("ID: {$taxista->id} - {$taxista->user->name} {$taxista->user->apellidos} - {$numero}");
                     }
 
                 }
