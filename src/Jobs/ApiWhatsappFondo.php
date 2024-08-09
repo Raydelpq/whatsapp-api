@@ -56,7 +56,7 @@ class ApiWhatsappFondo implements ShouldQueue
                 }
 
                 if (!$inGrupo) {
-                    $mensaje = Lang::get('whatsappapi.recarga', ['name' => $this->taxista->user->name]);
+                    $mensaje = Lang::get('whatsappapi.recarga', ['name' => $this->taxista->user->name, 'fondo' => $this->taxista->fondo]);
                     WhatsAppController::sendMessage($numero, $mensaje);
                 }
             } else
