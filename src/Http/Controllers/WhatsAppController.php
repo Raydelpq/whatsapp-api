@@ -111,6 +111,11 @@ class WhatsAppController extends Controller
             $mensaje = Lang::get('whatsappapi.not_found');
             self::sendMessage($request->telefono, $mensaje);
         }
+
+        return response()->json([
+            'status' => true,
+            'message' => "Saldo enviado a : ".$user->name
+        ]);
     }
 
 
