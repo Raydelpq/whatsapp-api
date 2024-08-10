@@ -70,6 +70,9 @@ class WhatsAppController extends Controller
             if ($user == null) {
 
                 self::delGroup($request->groupId,$participant['id']['user']);
+
+                $mensaje = Lang::get('whatsappapi.not_found');
+                self::sendMessage($participant['id']['user'], $mensaje);
             }
             $i++;
         }
