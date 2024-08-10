@@ -7,9 +7,15 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
 use Raydelpq\WhatsappApi\Models\Whatsapp;
+use Illuminate\Support\Facades\Lang;
 
 class WhatsAppController extends Controller
 {
+
+    // Devuelve el endpoint de la api donde esta la app de node
+    public static function getEndponit(){
+        return  config('whatsappapi.URL_WA') . ':' . config('whatsappapi.PORT_WA') . config('whatsappapi.ENDPOINT_WA');
+    }
 
     // Cargar Taxistas de Whatsapp
     public function loadTaxistas(Request $request)
@@ -44,14 +50,69 @@ class WhatsAppController extends Controller
         ]);
     }
 
-    // Devuelve el endpoint de la api donde esta la app de node
-    public static function getEndponit(){
-        return  config('whatsappapi.URL_WA') . ':' . config('whatsappapi.PORT_WA') . config('whatsappapi.ENDPOINT_WA');
+    // Expulsar Taxistas de Whatsapp
+    public function expulsarTaxistas(Request $request)
+    {
+
+        $grupo = Whatsapp::where('group_id', $request->groupId)->first();
+
+        $i = 0;
+        foreach ($request->participants as $participant) {
+
+            $telefono = $participant['id']['user'];
+
+            if (substr($telefono, 0, 2) == 53)
+                $telefono = substr($telefono, 2, 8);
+
+            $user = User::where('telefono', $telefono)->first();
+
+
+            if ($user == null) {
+
+                self::delGroup($request->groupId,$participant['id']['user']);
+            }
+            $i++;
+        }
+
+
+        return response()->json([
+            'cantidad' => $i
+        ]);
     }
+
+     /**
+     * Método estático para obtener el fondo de un taxista basado en su número de teléfono.
+     *
+     * @param Request $request
+     * @return void
+     */
+    public static function getFondo(Request $request)
+    {
+        $telefono = $request->input('telefono');
+
+        // Si el número comienza con 53, quitar el 53
+        if (substr($telefono, 0, 2) === '53') {
+            $telefono = substr($telefono, 2);
+        }
+
+        // Buscar coincidencia en la columna 'telefono' del modelo Taxista
+        $taxista = Taxista::where('telefono', $telefono)->first();
+
+        if ($taxista) {
+            // Si se encuentra el taxista, enviar mensaje con el fondo
+            $mensaje = Lang::get('whatsappapi.fondo',['name' => $taxista->user->name,'fondo' => $taxista->fondo]);
+            self::sendMessage($request->telefono, $mensaje);
+        } else {
+            // Si no se encuentra el taxista, enviar mensaje de error
+            $mensaje = Lang::get('whatsappapi.not_found');
+            self::sendMessage($request->telefono, $mensaje);
+        }
+    }
+
 
     // Enviar Mensajes a un Usuario
     public static function sendMessage($numero, $message){
-        $endpoint = WhatsAppController::getEndponit();
+        $endpoint = self::getEndponit();
         try{
             $response = Http::retry(3,100)->post($endpoint."/send",[
                 'phoneNumber' => $numero,
@@ -81,7 +142,7 @@ class WhatsAppController extends Controller
     // Agregar usuario a Grupo
     public static function addGroup($grupoId,$numero){
         try{
-            $endpoint = WhatsAppController::getEndponit();
+            $endpoint = self::getEndponit();
             $response = Http::retry(3,100)->post($endpoint."group/add",[
                 'groupId' => $grupoId,
                 'participante' => $numero,
@@ -110,7 +171,7 @@ class WhatsAppController extends Controller
     // Eliminar usuario a Grupo
     public static function delGroup($grupoId,$numero){
         try{
-            $endpoint = WhatsAppController::getEndponit();
+            $endpoint = self::getEndponit();
             $response = Http::retry(3,100)->post($endpoint."group/del",[
                 'groupId' => $grupoId,
                 'participante' => $numero,
@@ -139,7 +200,7 @@ class WhatsAppController extends Controller
     // verificar usuario a Grupo
     public static function inGroup($grupoId,$numero){
         try{
-            $endpoint = WhatsAppController::getEndponit();
+            $endpoint = self::getEndponit();
             $response = Http::retry(3,100)->post($endpoint."group/is",[
                 'groupId' => $grupoId,
                 'participante' => $numero
