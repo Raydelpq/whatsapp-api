@@ -3,7 +3,6 @@ namespace Raydelpq\WhatsappApi\Http\Controllers;
 
 use Exception;
 use App\Models\User;
-use App\Models\Taxista;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
@@ -97,11 +96,12 @@ class WhatsAppController extends Controller
         }
 
         // Buscar coincidencia en la columna 'telefono' del modelo Taxista
-        $taxista = Taxista::where('telefono', $telefono)->first();
+        $user = User::where('telefono', $telefono)->first();
 
-        if ($taxista) {
-            // Si se encuentra el taxista, enviar mensaje con el fondo
-            $mensaje = Lang::get('whatsappapi.fondo',['name' => $taxista->user->name,'fondo' => $taxista->fondo]);
+        if ($user) {
+            // Si se encuentra el usuario, enviar mensaje con el fondo
+            $taxista = $user->taxista;
+            $mensaje = Lang::get('whatsappapi.fondo',['name' => $user->name,'fondo' => $taxista->fondo]);
             self::sendMessage($request->telefono, $mensaje);
         } else {
             // Si no se encuentra el taxista, enviar mensaje de error
