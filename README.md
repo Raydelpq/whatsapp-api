@@ -2,13 +2,19 @@
  Gestionar agencias de taxis desde whatsapp
 
 # Install
- ``composer require raydelpq/whatsapp-api``
+ ```bash 
+   composer require raydelpq/whatsapp-api
+ ```
 
 # Public Vendor
- ``php artisan vendor:publish --tag=whatsappapi``
+ ```bash
+   php artisan vendor:publish --tag=whatsappapi
+ ```
 
 # Ejecutar Migracion
- ``php artisan migrate``
+ ```bash
+   php artisan migrate
+ ```
 
 # Agragar al Model Taxista
  ```bash
@@ -19,22 +25,32 @@
 
  ## Dentro del Modelo agregar los jobs en las funciones
   ### addSaldo
-   ``\Raydelpq\WhatsappApi\Jobs\ApiWhastappAdd::dispatch($this);``
+   ```bash
+    \Raydelpq\WhatsappApi\Jobs\ApiWhastappAdd::dispatch($this);
+   ```
 
-   ### addSaldo
-   ``\Raydelpq\WhatsappApi\Jobs\ApiWhastappDel::dispatch($this);``
+   ### delSaldo
+   ```bash
+      \Raydelpq\WhatsappApi\Jobs\ApiWhastappDel::dispatch($this);
+   ```
 
 # Dentro de App\Http\Livewire\Taxista\AgregarFonfo
  ## El el metodo procesar antes de los eventos
- ``\Raydelpq\WhatsappApi\Jobs\ApiWhatsappFondo::dispatch($this->taxista);``
+ ```bash
+    \Raydelpq\WhatsappApi\Jobs\ApiWhatsappFondo::dispatch($this->taxista);
+ ```
 
 # Provider
- ``Raydelpq\WhatsappApi\WhatsappApiServiceProvider::class``
+ ```bash
+    Raydelpq\WhatsappApi\WhatsappApiServiceProvider::class
+ ```
 
 # Jobs
- ``Raydelpq\WhatsappApi\Jobs\ApiWhastappAdd``
- ``Raydelpq\WhatsappApi\Jobs\ApiWhastappDel``
- ``Raydelpq\WhatsappApi\Jobs\ApiWhastappFondo``
+ ```bash
+    Raydelpq\WhatsappApi\Jobs\ApiWhastappAdd
+    Raydelpq\WhatsappApi\Jobs\ApiWhastappDel
+    Raydelpq\WhatsappApi\Jobs\ApiWhastappFondo
+ ```
 
 # Componente de Livewire
  ```bash
@@ -53,8 +69,16 @@
  
 
 # Mostrar QR
- Limpiar cache de Rutas ``php artisan route:cache``
- Ruta ``/getqr``
+ Limpiar cache de Rutas 
+ ```bash 
+   php artisan route:cache
+ ```
+ Ruta 
+ ```bash
+   https://mi.domain.com/getqr
+ ```
 
 # Expulsar a todos los taxistas 
-   ``php artisan out:taxista``
+   ```bash
+      php artisan out:taxista
+   ```
