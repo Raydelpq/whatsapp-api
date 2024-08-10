@@ -29,7 +29,7 @@
     \Raydelpq\WhatsappApi\Jobs\ApiWhastappAdd::dispatch($this);
    ```
 
-   ### addSaldo
+   ### delSaldo
    ```bash
       \Raydelpq\WhatsappApi\Jobs\ApiWhastappDel::dispatch($this);
    ```
