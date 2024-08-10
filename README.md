@@ -2,13 +2,19 @@
  Gestionar agencias de taxis desde whatsapp
 
 # Install
- ```bash composer require raydelpq/whatsapp-api ```
+ ```bash 
+   composer require raydelpq/whatsapp-api
+ ```
 
 # Public Vendor
- ```bash php artisan vendor:publish --tag=whatsappapi ```
+ ```bash
+   php artisan vendor:publish --tag=whatsappapi
+ ```
 
 # Ejecutar Migracion
- ```bash php artisan migrate ```
+ ```bash
+   php artisan migrate
+ ```
 
 # Agragar al Model Taxista
  ```bash
