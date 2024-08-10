@@ -3,6 +3,7 @@ namespace Raydelpq\WhatsappApi\Http\Controllers;
 
 use Exception;
 use App\Models\User;
+use App\Models\Taxista;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
