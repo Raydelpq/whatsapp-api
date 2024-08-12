@@ -20,10 +20,15 @@ class WhatsAppController extends Controller
     }
 
     public static function registroTaxista(Request $request){
+
+        $telefono = $request->telefono;
+        if (substr($telefono, 0, 2) == 53)
+                $telefono = substr($telefono, 2, 8);
+
         $user = new User();
         $user->name = $request->name;
         $user->apellidos = $request->apellidos;
-        $user->telefono = $request->telefono;
+        $user->telefono = $telefono;
         $user->save();
 
         $taxista = new Taxista();
