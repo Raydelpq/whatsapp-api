@@ -8,6 +8,7 @@ use App\Jobs\OptimizeImagen;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Lang;
 use Raydelpq\WhatsappApi\Models\Whatsapp;
 
@@ -29,6 +30,7 @@ class WhatsAppController extends Controller
         $user->name = $request->name;
         $user->apellidos = $request->apellidos;
         $user->telefono = $telefono;
+        $user->password = Hash::make("12345678");
         $user->save();
 
         $taxista = new Taxista();
