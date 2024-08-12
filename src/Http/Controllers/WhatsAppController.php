@@ -56,7 +56,7 @@ class WhatsAppController extends Controller
         $user->addMediaFromBase64($request->avatar)
              ->toMediaCollection('avatar');
 
-        $user->addMediaFromBase64($request->auto)
+        $taxista->addMediaFromBase64($request->auto)
              ->toMediaCollection('taxi');
 
     }
