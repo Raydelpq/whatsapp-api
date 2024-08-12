@@ -34,6 +34,7 @@ class WhatsAppController extends Controller
         $user->save();
 
         $taxista = new Taxista();
+        $taxista->user_id = $user->id;
         $taxista->marca = $request->marca;
         $taxista->modelo = $request->modelo;
         $taxista->color = $request->color;
