@@ -3,11 +3,13 @@ namespace Raydelpq\WhatsappApi\Http\Controllers;
 
 use Exception;
 use App\Models\User;
+use App\Models\Taxista;
+use App\Jobs\OptimizeImagen;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Http\Request;
-use Raydelpq\WhatsappApi\Models\Whatsapp;
 use Illuminate\Support\Facades\Lang;
+use Raydelpq\WhatsappApi\Models\Whatsapp;
 
 class WhatsAppController extends Controller
 {
@@ -15,6 +17,34 @@ class WhatsAppController extends Controller
     // Devuelve el endpoint de la api donde esta la app de node
     public static function getEndponit(){
         return  config('whatsappapi.URL_WA') . ':' . config('whatsappapi.PORT_WA') . config('whatsappapi.ENDPOINT_WA');
+    }
+
+    public static function registroTaxista(Request $request){
+        $user = new User();
+        $user->name = $request->name;
+        $user->apellidos = $request->apellidos;
+        $user->telefono = $request->telefono;
+        $user->save();
+
+        $taxista = new Taxista();
+        $taxista->marca = $request->carBrand;
+        $taxista->modelo = $request->carModel;
+        $taxista->color = $request->carColor;
+        $taxista->lic_operativa = $request->lic_operativa == "Si" ? true : false;
+        $taxista->aire = $request->aire == "Si" ? true : false;
+        $taxista->save();
+
+        $user->assignRole('Taxista');
+        $user->addMedia($request->avatar->getRealPath())->toMediaCollection('avatar');
+
+        $taxista->addMedia($request->auto->getRealPath())->toMediaCollection('taxi');
+
+        $imgAvatar = $user->getMedia('avatar')->first();
+        OptimizeImagen::dispatch($imgAvatar->getPath());
+
+        $imgTaxi = $taxista->getMedia('taxi')->first();
+        OptimizeImagen::dispatch($imgTaxi->getPath());
+
     }
 
     // Cargar Taxistas de Whatsapp
