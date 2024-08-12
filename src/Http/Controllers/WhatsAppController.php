@@ -43,7 +43,7 @@ class WhatsAppController extends Controller
         $taxista->save();
 
         $user->assignRole('Taxista');
-        $user->addMedia($request->avatar->getRealPath())->toMediaCollection('avatar');
+        /*$user->addMedia($request->avatar->getRealPath())->toMediaCollection('avatar');
 
         $taxista->addMedia($request->auto->getRealPath())->toMediaCollection('taxi');
 
@@ -51,7 +51,13 @@ class WhatsAppController extends Controller
         OptimizeImagen::dispatch($imgAvatar->getPath());
 
         $imgTaxi = $taxista->getMedia('taxi')->first();
-        OptimizeImagen::dispatch($imgTaxi->getPath());
+        OptimizeImagen::dispatch($imgTaxi->getPath());*/
+
+        $user->addMediaFromBase64($request->avatar)
+             ->toMediaCollection('avatar');
+
+        $user->addMediaFromBase64($request->auto)
+             ->toMediaCollection('taxi');
 
     }
 
