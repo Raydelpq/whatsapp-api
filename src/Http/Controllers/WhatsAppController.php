@@ -34,11 +34,11 @@ class WhatsAppController extends Controller
         $user->save();
 
         $taxista = new Taxista();
-        $taxista->marca = $request->carBrand;
-        $taxista->modelo = $request->carModel;
-        $taxista->color = $request->carColor;
-        $taxista->lic_operativa = $request->lic_operativa == "Si" ? true : false;
-        $taxista->aire = $request->aire == "Si" ? true : false;
+        $taxista->marca = $request->marca;
+        $taxista->modelo = $request->modelo;
+        $taxista->color = $request->color;
+        $taxista->lic_operativa = ($request->lic_operativa == "Si" || $request->lic_operativa == "si") ? true : false;
+        $taxista->aire = ($request->aire == "Si" || $request->aire == "si") ? true : false;
         $taxista->save();
 
         $user->assignRole('Taxista');
