@@ -206,6 +206,35 @@ class WhatsAppController extends Controller
         ]);
     }
 
+    public static function sendFile($numero, $file, $caption, $grupo){
+        $endpoint = self::getEndponit();
+        try{
+            $response = Http::retry(3,100)->post($endpoint."/send/file",[
+                'chatId' => $numero,
+                'file' => $file,
+                'caption' => $caption,
+                'grupo' => $grupo,
+            ]);
+
+            if($response->ok())
+                return response()->json([
+                    'status' => true,
+                    'message' => "Archivo Enviado"
+                ]);
+
+        }catch(Exception $error){
+            return response()->json([
+                'status' => false,
+                'message' => $error
+            ]);
+        }
+
+        return response()->json([
+            'status' => false,
+            'message' => "Algo ha salido mal, vuelva a intentarlo"
+        ]);
+    }
+
     // Agregar usuario a Grupo
     public static function addGroup($grupoId,$numero){
         try{
