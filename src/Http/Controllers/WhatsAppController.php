@@ -45,27 +45,26 @@ class WhatsAppController extends Controller
 
         $user->assignRole('Taxista');
 
-        if ($request->hasFile('avatar')) {
+        /*if ($request->hasFile('avatar')) {
             $path = $request->file('avatar')->store('public/photos');
             $img = Storage::url($path);
             $user->addMedia($img)->toMediaCollection('avatar');
         }
 
-        if ($request->hasFile('carPhoto')) {
-            $path = $request->file('carPhoto')->store('public/photos');
+        if ($request->hasFile('auto')) {
+            $path = $request->file('auto')->store('public/photos');
             $img = Storage::url($path);
             $taxista->addMedia($img)->toMediaCollection('avatar');
-        }
+        }*/
 
-        /*$user->addMedia($request->avatar->getRealPath())->toMediaCollection('avatar');
-
+        $user->addMedia($request->avatar->getRealPath())->toMediaCollection('avatar');
         $taxista->addMedia($request->auto->getRealPath())->toMediaCollection('taxi');
 
         $imgAvatar = $user->getMedia('avatar')->first();
         OptimizeImagen::dispatch($imgAvatar->getPath());
 
         $imgTaxi = $taxista->getMedia('taxi')->first();
-        OptimizeImagen::dispatch($imgTaxi->getPath());*/
+        OptimizeImagen::dispatch($imgTaxi->getPath());
 
         /*$user->addMediaFromBase64($request->avatar)
              ->toMediaCollection('avatar');
