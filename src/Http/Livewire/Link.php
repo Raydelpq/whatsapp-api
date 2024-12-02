@@ -4,7 +4,7 @@ namespace Raydelpq\WhatsappApi\Http\Livewire;
 
 use Livewire\Component;
 
-class GetQr extends Component
+class Link extends Component
 {
 
     public function render()
