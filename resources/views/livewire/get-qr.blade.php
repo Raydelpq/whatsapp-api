@@ -44,10 +44,10 @@
         contenedorQR.style.display = 'flex';
         contenedorMensaje.style.display = 'none';
         const QR = new QRCode(contenedorQR, {
-            text: value,
             width: contenedorQR.offsetWidth,
             height: contenedorQR.offsetHeight
         });
+        QR.makeCode(value);
     }
 
     const mostrarInformacion = (titulo, mensaje, mostrarSpinner) => {
