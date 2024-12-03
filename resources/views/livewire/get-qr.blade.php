@@ -48,7 +48,7 @@
 
     // Autenticado
     channel.bind('{{ $canal }}.AUTH', function(data) {
-      mostrarInformacion('Autenticando', "El cliente ya fue autenticado");
+      mostrarInformacion('Autenticando', "El cliente ya fue autenticado",true);
     });
 
     // Ready
