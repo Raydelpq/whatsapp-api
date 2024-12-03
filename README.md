@@ -63,10 +63,16 @@
  @if( Auth::user()->hasRole('Administrador') && config("whatsappapi.API_WA") == true )
     <div x-show="tab == 0" class="p-4 bg-slate-300 dark:bg-slate-800 rounded-b rounded-tr w-full">
         <livewire:taxista.whatsapp :taxista='$taxista'>
-    </div>`
+    </div>
  @endif
  ```
+
  
+ ```bash
+ @if( Auth::user()->hasRole('Administrador') && config("whatsappapi.API_WA") == true )
+    livewire:taxista.link>
+ @endif
+ ```
 
 # Mostrar QR
  Limpiar cache de Rutas 
