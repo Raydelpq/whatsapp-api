@@ -66,14 +66,10 @@
         contenedorQR.classList.add('opacity-100');
         qrTimer.style.display = 'block';
         contenedorMensaje.style.display = 'none';
-<<<<<<< HEAD
-        const QR = new QRCode(contenedorQR);
-=======
         const QR = new QRCode(contenedorQR, {
             width: contenedorQR.offsetWidth,
             height: contenedorQR.offsetHeight
         });
->>>>>>> 5d7addd4078f1843bfc8e58dc200ab586dc4b43a
         QR.makeCode(value);
     }
 
