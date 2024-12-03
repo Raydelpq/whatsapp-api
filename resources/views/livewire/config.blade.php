@@ -54,10 +54,6 @@
 
     <div>
         <div class="flex">
-<<<<<<< Updated upstream
-=======
-            
->>>>>>> Stashed changes
             <button class="btn bg-red-600 hover:bg-red-500 text-white mx-2" wire:click='sacar'>
                 <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" wire:target="sacar" wire:loading.class.remove="hidden">
                     <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
@@ -67,11 +63,7 @@
             </button>
 
             <button class="btn bg-red-600 hover:bg-red-500 text-white mx-2" wire:click='restar'>
-<<<<<<< Updated upstream
-                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" wire:target="sacar" wire:loading.class.remove="hidden">
-=======
                 <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" wire:target="restar" wire:loading.class.remove="hidden">
->>>>>>> Stashed changes
                     <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                     <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                 </svg>
@@ -79,16 +71,6 @@
             </button>
         </div>
     </div>
-<<<<<<< Updated upstream
-=======
-    @if($resultado)
-    <div>
-        <div class="flex">  
-            {!! $resultado !!}
-        </div>
-    </div>
-    @endif
->>>>>>> Stashed changes
 
 
 </div>
