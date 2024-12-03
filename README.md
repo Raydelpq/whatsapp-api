@@ -70,7 +70,7 @@
  
  ```bash
  @if( Auth::user()->hasRole('Administrador') && config("whatsappapi.API_WA") == true )
-    livewire:taxista.link>
+    <livewire:link>
  @endif
  ```
 
