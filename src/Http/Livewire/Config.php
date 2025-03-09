@@ -31,7 +31,7 @@ class Config extends Component
         $this->emit('message','Comando Ejecutado','success');
     }
 
-    public function restar(){
+    public function restar0(){
         $url = $this->url."pm2/start/{$this->processName}";
         //dd($url);
         $response = Http::withHeaders(
@@ -46,5 +46,29 @@ class Config extends Component
             $this->emit('message','Error al reiniciar el proceso','warning');
         }
         //$this->resultado = $response->body();
+    }
+
+    public function restar(){
+        // Asegúrate de tener el valor de $name
+        if (!$this->processName) {
+            return;
+        }
+
+        // Comando a ejecutar
+        $command = "pm2 start {$this->processName} --watch";
+
+        // Crear y ejecutar el proceso
+        $process = Process::fromShellCommandline($command);
+        $process->run();
+
+        // Manejar errores en la ejecución
+        if (!$process->isSuccessful()) {
+            //throw new ProcessFailedException($process);
+            $this->emit('message','Error al reiniciar el proceso','warning');
+        }
+
+        // Output en caso de éxito
+        $this->emit('message','Comando Ejecutado','success');
+        //$this->emit('resetSuccessful', $process->getOutput());
     }
 }
