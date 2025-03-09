@@ -59,7 +59,7 @@ class Config extends Component
 
         // Construye la ruta completa al archivo reset.sh
         // __DIR__ se refiere al directorio donde se encuentra este archivo (por ejemplo, src/)
-        $scriptPath = realpath(__DIR__ . '/../scripts/reset.sh');
+        $scriptPath = realpath(__DIR__ . '/../../../scripts/reset.sh');
 
         // Asegúrate de que la ruta exista
         if (!$scriptPath || !file_exists($scriptPath)) {
