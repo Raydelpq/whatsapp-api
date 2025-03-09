@@ -5,6 +5,8 @@ namespace Raydelpq\WhatsappApi\Http\Livewire;
 use Livewire\Component;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Artisan;
+use Symfony\Component\Process\Process;
+use Symfony\Component\Process\Exception\ProcessFailedException;
 
 class Config extends Component
 {
