@@ -53,8 +53,23 @@ class Config extends Component
     public function restar(){
         // Asegúrate de tener el valor de $name
         if (!$this->processName) {
+            $this->emit('message','No hay un nombre para el proceso','warning');
             return;
         }
+
+        // Verificar el estado del proceso
+        $statusCommand = "pm2 status {$this->processName}";
+        $statusProcess = Process::fromShellCommandline($statusCommand);
+        $statusProcess->run();
+
+        if ($statusProcess->isSuccessful()) {
+            $statusOutput = $statusProcess->getOutput();
+            $this->emit('message', "Estado del proceso: $statusOutput", 'info');
+        } else {
+            $this->emit('message', 'Error al obtener el estado del proceso', 'warning');
+        }
+
+        return ;
 
         // Comando a ejecutar
         $command = "pm2 start {$this->processName} --watch";
