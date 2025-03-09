@@ -51,28 +51,34 @@ class Config extends Component
     }
 
     public function restar(){
-        // Asegúrate de tener el valor de $name
+
         if (!$this->processName) {
-            $this->emit('message','No hay un nombre para el proceso','warning');
+            $this->emit('message', 'Por favor, proporciona el nombre del proceso', 'warning');
             return;
         }
 
-        // Comando a ejecutar
-        //$command = "pm2 start {$this->processName} --watch";
-        $command = "./reset.sh {$this->processName}";
+        // Construye la ruta completa al archivo reset.sh
+        // __DIR__ se refiere al directorio donde se encuentra este archivo (por ejemplo, src/)
+        $scriptPath = realpath(__DIR__ . '/../scripts/reset.sh');
 
-        // Crear y ejecutar el proceso
-        $process = Process::fromShellCommandline($command);
-        $process->run();
-
-        // Manejar errores en la ejecución
-        if (!$process->isSuccessful()) {
-            //throw new ProcessFailedException($process);
-            $this->emit('message','Error al reiniciar el proceso','warning');
+        // Asegúrate de que la ruta exista
+        if (!$scriptPath || !file_exists($scriptPath)) {
+            $this->emit('message', 'No se encontró el script reset.sh', 'warning');
+            return;
         }
 
-        // Output en caso de éxito
-        $this->emit('message','Comando Ejecutado','success');
-        //$this->emit('resetSuccessful', $process->getOutput());
+        // Prepara el comando, pasando el nombre del proceso como parámetro
+        $command = escapeshellcmd("{$scriptPath} {$this->processName}");
+
+        // Ejecuta el comando y captura la salida y el código de retorno
+        $output = [];
+        exec($command, $output, $exitCode);
+
+        // Emite mensaje según el resultado
+        if ($exitCode === 0) {
+            $this->emit('message', 'Proceso reiniciado exitosamente', 'success');
+        } else {
+            $this->emit('message', 'Error al reiniciar el proceso', 'warning');
+        }
     }
 }
