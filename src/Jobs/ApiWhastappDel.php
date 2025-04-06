@@ -40,12 +40,17 @@ class ApiWhastappDel implements ShouldQueue
         if (!$this->taxista->permiso)
             if (config('whatsappapi.API_WA')) {
                 $min = config('whatsappapi.MIN_WA');
+                $minNotificar = config('whatsappapi.MIN_NOTIFICAR');
 
                 $numero = WhatsAppController::getNumero($this->taxista->user->telefono);
 
                 if ($this->modo == true) {
                     $this->sacar($numero);
                 } else
+                if ($this->taxista->fondo > $min && $this->taxista->fondo <= $minNotificar) {
+                    $this->mensaje = Lang::get('whatsappapi.notificar',['name' => $this->taxista->user->name,'fondo' => $this->taxista->fondo]);
+                    WhatsAppController::sendMessage($numero,$this->mensaje);
+                }else
                 if ($this->taxista->fondo <= $min) {
                     $this->sacar($numero);
                 }
