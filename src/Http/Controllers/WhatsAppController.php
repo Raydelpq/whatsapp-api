@@ -18,7 +18,7 @@ class WhatsAppController extends Controller
 
     // Devuelve el endpoint de la api donde esta la app de node
     public static function getEndponit(){
-        return  config('whatsappapi.URL_WA') . ':' . config('whatsappapi.PORT_WA') . config('whatsappapi.ENDPOINT_WA');
+        return  config('whatsappapi.URL_WA') . ':' . config('whatsappapi.PORT_WA');
     }
 
     public static function registroTaxista(Request $request){
@@ -179,11 +179,14 @@ class WhatsAppController extends Controller
     // Enviar Mensajes a un Usuario
     public static function sendMessage($numero, $message){
         $endpoint = self::getEndponit();
+        $instance = env('EVOLUTION_INSTANCE');
+        $apikey = env('EVOLUTION_APIKEY');
         try{
-            $response = Http::retry(3,100)->post($endpoint."/send",[
-                'phoneNumber' => $numero,
-                'message' => $message,
-                'clientId' => env("clienteID")
+            $response = Http::withHeaders([
+                'apikey' => $apikey
+            ])->retry(3,100)->post($endpoint."/message/sendText/{$instance}",[
+                'number' => $numero,
+                'text' => $message,
             ]);
 
             if($response->ok())
@@ -238,10 +241,13 @@ class WhatsAppController extends Controller
     public static function addGroup($grupoId,$numero){
         try{
             $endpoint = self::getEndponit();
-            $response = Http::retry(3,100)->post($endpoint."group/add",[
-                'groupId' => $grupoId,
-                'participante' => $numero,
-                'clientId' => env("clienteID")
+            $instance = env('EVOLUTION_INSTANCE');
+            $apikey = env('EVOLUTION_APIKEY');
+            $response = Http::withHeaders([
+                'apikey' => $apikey
+            ])->retry(3,100)->post($endpoint."/group/updateParticipant/{$instance}?groupJid={$grupoId}",[
+                'action' => 'add',
+                'participants' => [$numero],
             ]);
 
             if($response->ok())
@@ -267,10 +273,13 @@ class WhatsAppController extends Controller
     public static function delGroup($grupoId,$numero){
         try{
             $endpoint = self::getEndponit();
-            $response = Http::retry(3,100)->post($endpoint."group/del",[
-                'groupId' => $grupoId,
-                'participante' => $numero,
-                'clientId' => env("clienteID")
+            $instance = env('EVOLUTION_INSTANCE');
+            $apikey = env('EVOLUTION_APIKEY');
+            $response = Http::withHeaders([
+                'apikey' => $apikey
+            ])->retry(3,100)->post($endpoint."/group/updateParticipant/{$instance}?groupJid={$grupoId}",[
+                'action' => 'remove',
+                'participants' => [$numero],
             ]);
 
             if($response->ok())
@@ -293,26 +302,35 @@ class WhatsAppController extends Controller
     }
 
     // verificar usuario a Grupo
-    public static function inGroup($grupoId,$numero){
-        try{
-            $endpoint = self::getEndponit();
-            $response = Http::retry(3,100)->post($endpoint."group/is",[
-                'groupId' => $grupoId,
-                'participante' => $numero
-            ])->json();
+    public static function inGroup($groupId,$numero){
+        $endpoint = env('EVOLUTION_API_URL'); // ejemplo: http://mi.endpoint
+        $apiKey = env('EVOLUTION_API_KEY');
+        $instance = env('EVOLUTION_INSTANCE');
 
-            return response()->json([
-                'status' => $response['ok'],
-                'message' => ""
-            ]);
+        $url = "$endpoint/group/participants/$instance?groupJid=$groupId";
 
+        $response = Http::withHeaders([
+            'apikey' => $apiKey
+        ])->retry(3, 100)
+        ->get($url);
 
-        }catch(Exception $error){
-            return response()->json([
-                'status' => false,
-                'message' => $error
-            ]);
+        if ($response->failed()) {
+            \Log::error("❌ Error al obtener participantes del grupo: " . $response->body());
+            return false;
         }
+
+        $participantes = $response->json('participants');
+
+        foreach ($participantes as $p) {
+            $numeroEnLista = explode('@', $p['id'])[0];
+            if ($numeroEnLista === $numero) {
+                \Log::info("✅ Número $numero encontrado en el grupo.");
+                return true;
+            }
+        }
+
+        \Log::info("❌ Número $numero no está en el grupo.");
+        return false;
     }
 
     // Retorna el numero si errores
