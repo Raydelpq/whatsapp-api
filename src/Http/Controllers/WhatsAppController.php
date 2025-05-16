@@ -18,7 +18,7 @@ class WhatsAppController extends Controller
 
     // Devuelve el endpoint de la api donde esta la app de node
     public static function getEndponit(){
-        return  config('whatsappapi.URL_WA') . ':' . config('whatsappapi.PORT_WA');
+        return  env('whatsappapi.URL_WA') . ':' . config('whatsappapi.PORT_WA');
     }
 
     public static function registroTaxista(Request $request){
@@ -241,8 +241,9 @@ class WhatsAppController extends Controller
     public static function addGroup($grupoId,$numero){
         try{
             $endpoint = self::getEndponit();
-            $instance = env('EVOLUTION_INSTANCE');
-            $apikey = env('EVOLUTION_APIKEY');
+            $instance = config('whatsappapi.EVOLUTION_INSTANCE');
+            $apikey = config('whatsappapi.EVOLUTION_APIKEY');
+
             $response = Http::withHeaders([
                 'apikey' => $apikey
             ])->retry(3,100)->post($endpoint."/group/updateParticipant/{$instance}?groupJid={$grupoId}",[

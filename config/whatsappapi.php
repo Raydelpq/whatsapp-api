@@ -10,5 +10,7 @@ return [
     'ENDPOINT_WA' => env('ENDPOINT_WA') ? env('ENDPOINT_WA') : '/api/v1',
     'CANAL_WA' => env('CANAL_WA') ? env('CANAL_WA') : 'setQR_',
     'Pusher_WA' => env('PUSHER_APP_KEY') ? env('PUSHER_APP_KEY') : '',
-    'procesoName' => env('procesoName') ? env('procesoName') : ''
+    'procesoName' => env('procesoName') ? env('procesoName') : '',
+    'EVOLUTION_INSTANCE' => env('EVOLUTION_INSTANCE') ? env('EVOLUTION_INSTANCE') : '',
+    'EVOLUTION_APIKEY' => env('EVOLUTION_APIKEY') ? env('EVOLUTION_APIKEY') : 'Prueba123*',
 ];
