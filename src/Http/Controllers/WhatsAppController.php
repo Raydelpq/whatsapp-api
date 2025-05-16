@@ -18,7 +18,7 @@ class WhatsAppController extends Controller
 
     // Devuelve el endpoint de la api donde esta la app de node
     public static function getEndponit(){
-        return  env('whatsappapi.URL_WA') . ':' . config('whatsappapi.PORT_WA');
+        return  config('whatsappapi.URL_WA') . ':' . config('whatsappapi.PORT_WA');
     }
 
     public static function registroTaxista(Request $request){

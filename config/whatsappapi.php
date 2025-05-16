@@ -12,5 +12,5 @@ return [
     'Pusher_WA' => env('PUSHER_APP_KEY') ? env('PUSHER_APP_KEY') : '',
     'procesoName' => env('procesoName') ? env('procesoName') : '',
     'EVOLUTION_INSTANCE' => env('EVOLUTION_INSTANCE') ? env('EVOLUTION_INSTANCE') : '',
-    'EVOLUTION_APIKEY' => env('EVOLUTION_APIKEY') ? env('EVOLUTION_APIKEY') : 'Prueba123*',
+    'EVOLUTION_APIKEY' => env('EVOLUTION_APIKEY') ? env('EVOLUTION_APIKEY') : 'Prueba123*'
 ];
