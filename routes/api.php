@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Raydelpq\WhatsappApi\Http\Controllers\WebhookController;
 use Raydelpq\WhatsappApi\Http\Controllers\ConfigController;
 use Raydelpq\WhatsappApi\Http\Controllers\WhatsAppController;
 
@@ -10,7 +9,3 @@ Route::post('/api/whatsapp/registro',  [WhatsAppController::class, 'registroTaxi
 Route::post('/api/expulsar',  [WhatsAppController::class, 'expulsarTaxistas'])->name('whatsapp_expulsar');
 Route::post('/api/getFondo',  [WhatsAppController::class, 'getFondo'])->name('whatsapp_getFondo');
 Route::post('/api/update-api-wa', [ConfigController::class, 'updateApiWa']);
-
-
-Route::post('/api/webhook/serviweb/evolution/QRCODE_UPDATED',  [WebhookController::class, 'QRCODE_UPDATED'])->name('webhook.qrcode_updated');
-Route::post('/api/webhook/serviweb/evolution/SEND_MESSAGE',    [WebhookController::class, 'SEND_MESSAGE'])->name('webhook.send_message');

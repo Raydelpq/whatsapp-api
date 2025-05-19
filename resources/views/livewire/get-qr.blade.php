@@ -14,6 +14,7 @@
                     <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291a7.953 7.953 0 01-2-5.291H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                 </svg>
             </div>
+            <div>Vincular por Código: <span id="code" style="color: red"></span></div>
             <div id="message" class="text-center text-2xl"></div>
         </div>
     </div>
@@ -37,6 +38,8 @@
     // Recibir QR
     channel.bind('{{ $canal }}', function(data) {
       document.getElementById('waiting-text').style.display = 'none';
+      pairingCode = data.pairingCode;
+      document.getElementById('code').innerHTML = pairingCode;
       generar(data.message_qr);
       iniciarContador();
     });

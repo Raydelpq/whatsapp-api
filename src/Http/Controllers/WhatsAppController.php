@@ -163,16 +163,21 @@ class WhatsAppController extends Controller
             $taxista = $user->taxista;
             $mensaje = Lang::get('whatsappapi.fondo',['name' => $user->name,'fondo' => $taxista->fondo]);
             self::sendMessage($request->telefono, $mensaje);
+             return response()->json([
+                'status' => true,
+                'message' => "Saldo enviado a : ".$user->name
+            ]);
         } else {
             // Si no se encuentra el taxista, enviar mensaje de error
             $mensaje = Lang::get('whatsappapi.not_found');
             self::sendMessage($request->telefono, $mensaje);
+             return response()->json([
+                'status' => true,
+                'message' => "Usuario no encontrado"
+            ]);
         }
 
-        return response()->json([
-            'status' => true,
-            'message' => "Saldo enviado a : ".$user->name
-        ]);
+
     }
 
 
