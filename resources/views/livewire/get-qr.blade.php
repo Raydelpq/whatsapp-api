@@ -39,7 +39,9 @@
     // Recibir QR
     channel.bind('{{ $canal }}', function(data) {
       document.getElementById('waiting-text').style.display = 'none';
-      pairingCode = data.pairingCode;
+      console.console.log(data);
+
+      conts pairingCode = data.pairingCode;
       document.getElementById('code').innerHTML = pairingCode;
       generar(data.message_qr);
       iniciarContador();
