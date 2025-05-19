@@ -302,10 +302,7 @@ class WhatsAppController extends Controller
         try{
             $response = Http::withHeaders([
                     'apikey' => $apikey
-                ])->retry(3,100)->get($url,[
-                    'action' => 'remove',
-                    'participants' => [$numero],
-                ]);
+                ])->retry(3,100)->get($url);
 
 
             $participantes = $response->json('participants');
