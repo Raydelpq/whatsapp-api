@@ -39,7 +39,7 @@
     // Recibir QR
     channel.bind('{{ $canal }}', function(data) {
       document.getElementById('waiting-text').style.display = 'none';
-      console.log(data);
+      //console.log(data);
 
       const pairingCode = data.pairingCode;
       document.getElementById('code').innerHTML = pairingCode;
