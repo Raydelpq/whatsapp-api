@@ -294,13 +294,13 @@ class WhatsAppController extends Controller
 
     // verificar usuario a Grupo
     public static function inGroup($groupId,$numero){
-        $endpoint = env('EVOLUTION_API_URL');
-        $apiKey = env('EVOLUTION_API_KEY');
+        $endpoint = self::getEndponit();
         $instance = env('EVOLUTION_INSTANCE');
+        $apikey = env('EVOLUTION_APIKEY');
 
         try{
             $response = Http::withHeaders([
-                    'apikey' => $apiKey
+                    'apikey' => $apikey
                 ])->retry(3,100)->post($endpoint."/group/participants/{$instance}?groupJid={$groupId}",[
                     'action' => 'remove',
                     'participants' => [$numero],
