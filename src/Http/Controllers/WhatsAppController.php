@@ -301,7 +301,7 @@ class WhatsAppController extends Controller
         try{
             $response = Http::withHeaders([
                     'apikey' => $apikey
-                ])->retry(3,100)->post($endpoint."/group/participants/{$instance}?groupJid={$groupId}",[
+                ])->retry(3,100)->get($endpoint."/group/participants/{$instance}?groupJid={$groupId}",[
                     'action' => 'remove',
                     'participants' => [$numero],
                 ]);
