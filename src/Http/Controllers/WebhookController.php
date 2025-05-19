@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Raydelpq\WhatsappApi\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;

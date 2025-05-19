@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\WebhookController;
+use Raydelpq\WhatsappApi\Http\Controllers\WebhookController;
 use Raydelpq\WhatsappApi\Http\Controllers\ConfigController;
 use Raydelpq\WhatsappApi\Http\Controllers\WhatsAppController;
 
