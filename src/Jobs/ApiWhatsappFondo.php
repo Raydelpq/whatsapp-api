@@ -47,9 +47,7 @@ class ApiWhatsappFondo implements ShouldQueue
                 foreach ($this->taxista->whatsapps as $grupo) {
 
                     if($inGrupo == null){
-                        $res = WhatsAppController::inGroup($grupo->group_id,$numero);
-                        $content = $res->getOriginalContent();
-                        $inGrupo = $content['status'];
+                        $inGrupo = WhatsAppController::inGroup($grupo->group_id,$numero);
                     }
 
                     WhatsAppController::addGroup($grupo->group_id, $numero);
@@ -66,9 +64,7 @@ class ApiWhatsappFondo implements ShouldQueue
                     foreach ($this->taxista->whatsapps as $grupo){
 
                         if($inGrupo == null){
-                            $res = WhatsAppController::inGroup($grupo->group_id,$numero);
-                            $content = $res->getOriginalContent();
-                            $inGrupo = $content['status'];
+                            $inGrupo = WhatsAppController::inGroup($grupo->group_id,$numero);
                         }
 
                         WhatsAppController::delGroup($grupo->group_id, $numero);
