@@ -4,7 +4,7 @@ namespace Raydelpq\WhatsappApi\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use Raydelpq\WhatsappApi\Http\Controllers\WhatsAppController;
+use App\Http\Controllers\Controller;
 
 class WebhookController extends Controller
 {
