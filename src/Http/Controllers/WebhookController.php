@@ -14,9 +14,9 @@ class WebhookController extends Controller
           $data = $request->all();
 
         if ($data) {
-            Log::info("🆕 QR actualizado: $data");
+            \Log::info("🆕 QR actualizado: $data");
         } else {
-            Log::warning("QR recibido pero vacío");
+            \Log::warning("QR recibido pero vacío");
         }
     }
 
@@ -25,9 +25,9 @@ class WebhookController extends Controller
         $data = $request->all();
 
         if ($data) {
-            Log::info("🆕 Mensaje actualizado: $data");
+            \Log::info("🆕 Mensaje actualizado: $data");
         } else {
-            Log::warning("Mensaje recibido pero vacío");
+            \Log::warning("Mensaje recibido pero vacío");
         }
     }
 }
