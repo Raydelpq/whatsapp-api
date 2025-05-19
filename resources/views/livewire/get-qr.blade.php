@@ -42,7 +42,7 @@
       //console.log(data);
 
       const pairingCode = data.pairingCode;
-      document.getElementById('code').innerHTML = pairingCode;
+      //document.getElementById('code').innerHTML = pairingCode;
       generar(data.message_qr);
       iniciarContador();
     });
