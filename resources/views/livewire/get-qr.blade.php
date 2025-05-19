@@ -4,7 +4,7 @@
             <p class="text-2xl animate-pulse">Esperando QR...</p>
         </div>
         <div class="flex flex-col items-center">
-            <div>Vincular por Código: <span id="code" style="color: red"></span></div>
+            <!--<div>Vincular por Código: <span id="code" style="color: red"></span></div>-->
             <div class="hidden bg-gray-700 text-white px-2 py-1 text-sm" id="qr-timer"></div>
             <div class="relative hidden w-64 h-64 border-black mt-2 transition-opacity duration-500 ease-in-out opacity-0" id="qr-container"></div>
         </div>
