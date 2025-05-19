@@ -297,13 +297,11 @@ class WhatsAppController extends Controller
         $endpoint = self::getEndponit();
         $instance = env('EVOLUTION_INSTANCE');
         $apikey = env('EVOLUTION_APIKEY');
-        $url = $endpoint."/group/participants/{$instance}?groupJid={$groupId}";
-        echo $url;
+
         try{
             $response = Http::withHeaders([
                     'apikey' => $apikey
-                ])->retry(3,100)->get($url);
-
+                ])->retry(3,100)->get($endpoint."/group/participants/{$instance}?groupJid={$groupId}");
 
             $participantes = $response->json('participants');
 
