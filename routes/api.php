@@ -12,5 +12,5 @@ Route::post('/api/getFondo',  [WhatsAppController::class, 'getFondo'])->name('wh
 Route::post('/api/update-api-wa', [ConfigController::class, 'updateApiWa']);
 
 
-Route::post('/api/webhook/serviweb/evolution/QRCODE_UPDATED',  [WebhookController::class, 'QRCODE_UPDATED']);
-Route::post('/api/webhook/serviweb/evolution/SEND_MESSAGE',    [WebhookController::class, 'SEND_MESSAGE']);
+Route::post('/api/webhook/serviweb/evolution/QRCODE_UPDATED',  [WebhookController::class, 'QRCODE_UPDATED'])->name('webhook.qrcode_updated');
+Route::post('/api/webhook/serviweb/evolution/SEND_MESSAGE',    [WebhookController::class, 'SEND_MESSAGE'])->name('webhook.send_message');
