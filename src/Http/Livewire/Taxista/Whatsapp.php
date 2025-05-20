@@ -4,9 +4,11 @@ namespace Raydelpq\WhatsappApi\Http\Livewire\Taxista;
 
 use Livewire\Component;
 use Illuminate\Support\Facades\Http;
-use Raydelpq\WhatsappApi\Models\Whatsapp as ModelsWhatsapp;
+use Illuminate\Support\Facades\Lang;
 use Raydelpq\WhatsappApi\Jobs\ApiWhastappAdd;
-use Raydelpq\WhatsappApi\Jobs\ApiWhastappDel; 
+use Raydelpq\WhatsappApi\Jobs\ApiWhastappDel;
+use Raydelpq\WhatsappApi\Models\Whatsapp as ModelsWhatsapp;
+use Raydelpq\WhatsappApi\Http\Controllers\WhatsAppController;
 
 class Whatsapp extends Component
 {
@@ -18,10 +20,10 @@ class Whatsapp extends Component
 
     // SI tiene permiso o no el taxista para trabajar sin fondo
     public $permiso;
-    
+
     // SI esta en el grupo o no
     public $in_grupo;
-    
+
     // Determina si el empleado esta iniciado
     public $isConected = false;
 
@@ -36,7 +38,7 @@ class Whatsapp extends Component
 
         if($this->empleado != null)
             $this->initEmpleado();
-            
+
 
 
         $grupos = ModelsWhatsapp::all();
@@ -44,7 +46,14 @@ class Whatsapp extends Component
     }
 
     public function entrar(){
-        ApiWhastappAdd::dispatch($this->taxista,true);
+        //ApiWhastappAdd::dispatch($this->taxista,true);
+         $numero = WhatsAppController::getNumero($this->taxista->user->telefono);
+         $inGrupo = false;
+
+        foreach($this->taxista->whatsapps as $grupo){
+            WhatsAppController::addGroup($grupo->group_id,$numero);
+        }
+        $this->emit('message','Operación Realizada','success');
     }
 
     public function sacar(){
@@ -72,7 +81,7 @@ class Whatsapp extends Component
     // Determina si esta en grupo o no
     public function is($w){
         $result = $this->taxista->whatsapps()->where('group_id',$w)->first();
-        
+
         if($result == null)
             return false;
 
@@ -82,7 +91,7 @@ class Whatsapp extends Component
     // Agrgar o quitar de grupos
     public function change($grupo){
         $grupo = ModelsWhatsapp::find($grupo);
-        
+
         if( !$this->is($grupo->group_id) ){
             //dd("no existe");
             $this->taxista->whatsapps()->attach($grupo->id);
@@ -101,5 +110,5 @@ class Whatsapp extends Component
         $this->taxista->update();
         $this->emit('message','Cambio Realizado','success');
     }
-  
+
 }
