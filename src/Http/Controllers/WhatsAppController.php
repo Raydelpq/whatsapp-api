@@ -188,7 +188,8 @@ class WhatsAppController extends Controller
         $apikey = env('EVOLUTION_APIKEY');
         try{
             $response = Http::withHeaders([
-                'apikey' => $apikey
+                'apikey' => $apikey,
+                'Accept' => 'application/json'
             ])->retry(3,100)->post($endpoint."/message/sendText/{$instance}",[
                 'number' => $numero,
                 'text' => $message,
@@ -250,7 +251,8 @@ class WhatsAppController extends Controller
             $apikey = config('whatsappapi.EVOLUTION_APIKEY');
 
             $response = Http::withHeaders([
-                'apikey' => $apikey
+                'apikey' => $apikey,
+                'Accept' => 'application/json'
             ])->retry(3,100)->post($endpoint."/group/updateParticipant/{$instance}?groupJid={$grupoId}",[
                 'action' => 'add',
                 'participants' => [$numero],
@@ -277,7 +279,8 @@ class WhatsAppController extends Controller
             $instance = env('EVOLUTION_INSTANCE');
             $apikey = env('EVOLUTION_APIKEY');
             $response = Http::withHeaders([
-                'apikey' => $apikey
+                'apikey' => $apikey,
+                'Accept' => 'application/json'
             ])->retry(3,100)->post($endpoint."/group/updateParticipant/{$instance}?groupJid={$grupoId}",[
                 'action' => 'remove',
                 'participants' => [$numero],
@@ -305,7 +308,8 @@ class WhatsAppController extends Controller
 
         try{
             $response = Http::withHeaders([
-                    'apikey' => $apikey
+                    'apikey' => $apikey,
+                    'Accept' => 'application/json'
                 ])->retry(3,100)->get($endpoint."/group/participants/{$instance}?groupJid={$groupId}");
 
             $participantes = $response->json('participants');
