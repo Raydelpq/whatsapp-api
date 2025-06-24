@@ -50,4 +50,21 @@ class Config extends Component
         //$this->resultado = $response->body();
     }
 
+    public function clearCache(){
+        $url = $this->url."pm2/clear/{$this->processName}";
+
+        $response = Http::withHeaders(
+            [ 'Content-Type' => 'application/json' ]
+        )->get($url);
+
+        // Maneja la respuesta
+        if ($response->successful()) {
+
+            $this->emit('message','Comando Ejecutado','success');
+        } else {
+            $this->emit('message','Error al reiniciar el proceso','warning');
+        }
+        //$this->resultado = $response->body();
+    }
+
 }

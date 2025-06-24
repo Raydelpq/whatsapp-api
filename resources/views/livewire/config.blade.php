@@ -3,7 +3,7 @@
     <div class="relative mt-2 bg-indigo-200 dark:bg-indigo-500 p-4 sm:p-6 rounded-sm overflow-hidden mb-8">
 
         <!-- Background illustration -->
-        <div class="absolute right-0 top-0 -mt-4 mr-16 pointer-events-none hidden xl:block" aria-hidden="true">
+        <div class="absolute right-0 top-0 -mt-4 mr-16 pointer-events-none hidden xl:block" aria-hidden="true"> 
             <svg width="319" height="198" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <defs>
                     <path id="welcome-a" d="M64 0l64 128-64-20-64 20z"></path>
@@ -60,6 +60,14 @@
                     <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                 </svg>
                 Eliminar Taxistas con Deuda
+            </button>
+
+            <button class="btn bg-red-600 hover:bg-red-500 text-white mx-2" wire:click='clearCache'>
+                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" wire:target="clearCache" wire:loading.class.remove="hidden">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Limpiar Cache
             </button>
 
             <button class="btn bg-red-600 hover:bg-red-500 text-white mx-2" wire:click='restar'>
